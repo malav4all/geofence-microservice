@@ -56,9 +56,7 @@ export class GeofenceService {
       ]);
       return { data, total };
     } catch (error) {
-      throw new BadRequestException(
-        'Failed to retrieve geofences: ' + error.message
-      );
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -84,9 +82,7 @@ export class GeofenceService {
       ]);
       return { data, total };
     } catch (error) {
-      throw new BadRequestException(
-        'Failed to search geofences: ' + error.message
-      );
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -97,9 +93,7 @@ export class GeofenceService {
         throw new NotFoundException(`Geofence with ID ${id} not found`);
       return geofence;
     } catch (error) {
-      throw new BadRequestException(
-        'Failed to retrieve geofence: ' + error.message
-      );
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -115,9 +109,7 @@ export class GeofenceService {
         throw new NotFoundException(`Geofence with ID ${id} not found`);
       return updatedGeofence;
     } catch (error) {
-      throw new BadRequestException(
-        'Failed to update geofence: ' + error.message
-      );
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -127,9 +119,7 @@ export class GeofenceService {
       if (!result)
         throw new NotFoundException(`Geofence with ID ${id} not found`);
     } catch (error) {
-      throw new BadRequestException(
-        'Failed to delete geofence: ' + error.message
-      );
+      throw new BadRequestException(error.message);
     }
   }
 }

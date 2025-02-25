@@ -54,12 +54,15 @@ export class GeofenceController {
         result
       );
     } catch (error) {
-      return new ApiResponse(
-        false,
-        HttpStatus.BAD_REQUEST,
-        'Failed to retrieve geofences',
-        null,
-        error.message
+      throw new HttpException(
+        new ApiResponse(
+          false,
+          HttpStatus.BAD_REQUEST,
+          'Failed to retrieve geofences',
+          null,
+          error.message
+        ),
+        HttpStatus.BAD_REQUEST
       );
     }
   }
@@ -83,12 +86,15 @@ export class GeofenceController {
         result
       );
     } catch (error) {
-      return new ApiResponse(
-        false,
-        HttpStatus.BAD_REQUEST,
-        'Failed to search geofences',
-        null,
-        error.message
+      throw new HttpException(
+        new ApiResponse(
+          false,
+          HttpStatus.BAD_REQUEST,
+          'Failed to search geofences',
+          null,
+          error.message
+        ),
+        HttpStatus.BAD_REQUEST
       );
     }
   }
@@ -104,12 +110,15 @@ export class GeofenceController {
         result
       );
     } catch (error) {
-      return new ApiResponse(
-        false,
-        HttpStatus.BAD_REQUEST,
-        'Failed to retrieve geofence',
-        null,
-        error.message
+      throw new HttpException(
+        new ApiResponse(
+          false,
+          HttpStatus.BAD_REQUEST,
+          'Failed to get geofences',
+          null,
+          error.message
+        ),
+        HttpStatus.BAD_REQUEST
       );
     }
   }
@@ -128,12 +137,15 @@ export class GeofenceController {
         result
       );
     } catch (error) {
-      return new ApiResponse(
-        false,
-        HttpStatus.BAD_REQUEST,
-        'Failed to update geofence',
-        null,
-        error.message
+      throw new HttpException(
+        new ApiResponse(
+          false,
+          HttpStatus.BAD_REQUEST,
+          'Failed to Update geofences',
+          null,
+          error.message
+        ),
+        HttpStatus.BAD_REQUEST
       );
     }
   }
@@ -148,12 +160,15 @@ export class GeofenceController {
         `Geofence with ID ${id} deleted successfully`
       );
     } catch (error) {
-      return new ApiResponse(
-        false,
-        HttpStatus.BAD_REQUEST,
-        'Failed to delete geofence',
-        null,
-        error.message
+      throw new HttpException(
+        new ApiResponse(
+          false,
+          HttpStatus.BAD_REQUEST,
+          'Failed to delete geofences',
+          null,
+          error.message
+        ),
+        HttpStatus.BAD_REQUEST
       );
     }
   }

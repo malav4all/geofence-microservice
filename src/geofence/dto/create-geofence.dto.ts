@@ -18,7 +18,6 @@ class GeoCodeDto {
 export class CreateGeofenceDto {
   @IsString() clientId: string;
   @IsString() name: string;
-  @IsString() locationType: string;
   @IsNumber() mobileNumber: number;
 
   @IsObject()

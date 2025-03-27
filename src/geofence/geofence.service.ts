@@ -51,7 +51,42 @@ export class GeofenceService {
     try {
       const skip = (page - 1) * limit;
       const [data, total] = await Promise.all([
-        this.geofenceModel.find().skip(skip).limit(limit).exec(),
+        this.geofenceModel.aggregate([
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'userId',
+              foreignField: '_id',
+              as: 'userId',
+            },
+          },
+          {
+            $unwind: {
+              path: '$userId',
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              mobileNumber: 1,
+              address: 1,
+              finalAddress: 1,
+              geoCodeData: 1,
+              userId: {
+                _id: 1,
+                fullName: 1,
+                email: 1,
+              },
+              createdBy: 1,
+              createdAt: 1,
+              updatedAt: 1,
+            },
+          },
+          { $skip: skip },
+          { $limit: Number(limit) },
+        ]),
         this.geofenceModel.countDocuments().exec(),
       ]);
       return { data, total };
@@ -70,14 +105,51 @@ export class GeofenceService {
       const query = {
         $or: [
           { name: new RegExp(searchText, 'i') },
-          { locationType: new RegExp(searchText, 'i') },
           { 'address.city': new RegExp(searchText, 'i') },
           { 'address.state': new RegExp(searchText, 'i') },
         ],
       };
 
       const [data, total] = await Promise.all([
-        this.geofenceModel.find(query).skip(skip).limit(limit).exec(),
+        this.geofenceModel.aggregate([
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'userId',
+              foreignField: '_id',
+              as: 'userId',
+            },
+          },
+          {
+            $unwind: {
+              path: '$userId',
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $match: query, // Apply search filter
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              mobileNumber: 1,
+              address: 1,
+              finalAddress: 1,
+              geoCodeData: 1,
+              userId: {
+                _id: 1,
+                fullName: 1,
+                email: 1,
+              },
+              createdBy: 1,
+              createdAt: 1,
+              updatedAt: 1,
+            },
+          },
+          { $skip: skip },
+          { $limit: Number(limit) },
+        ]),
         this.geofenceModel.countDocuments(query).exec(),
       ]);
       return { data, total };

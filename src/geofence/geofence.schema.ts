@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 @Schema()
 export class Address {
@@ -26,7 +26,8 @@ export class GeoCode {
 
 @Schema({ timestamps: true })
 export class Geofence extends Document {
-  @Prop({}) clientId: string;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
+  userId: string;
   @Prop({}) name: string;
   @Prop({}) locationType: string;
   @Prop({}) mobileNumber: number;

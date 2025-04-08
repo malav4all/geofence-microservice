@@ -13,8 +13,6 @@ This microservice handles geographical boundary management and location-based ev
 ### Key Features
 
 - Dynamic geofence creation and management
-- Real-time position tracking and boundary intersection detection
-- Event generation for entry, exit, and dwell time within boundaries
 - Support for various geofence shapes (circles, polygons, etc.)
 - Spatial querying and filtering capabilities
 

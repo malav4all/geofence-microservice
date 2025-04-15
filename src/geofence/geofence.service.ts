@@ -79,6 +79,8 @@ export class GeofenceService {
                 fullName: 1,
                 email: 1,
               },
+              isPublic: 1,
+              isPrivate: 1,
               createdBy: 1,
               createdAt: 1,
               updatedAt: 1,
@@ -86,6 +88,7 @@ export class GeofenceService {
           },
           { $skip: skip },
           { $limit: Number(limit) },
+          { $sort: { createdAt: -1 } },
         ]),
         this.geofenceModel.countDocuments().exec(),
       ]);

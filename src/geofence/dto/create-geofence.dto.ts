@@ -1,4 +1,10 @@
-import { IsString, IsNumber, IsObject, ValidateNested } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsObject,
+  ValidateNested,
+  IsBoolean,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 class GeometryDto {
@@ -35,6 +41,9 @@ export class CreateGeofenceDto {
   @ValidateNested()
   @Type(() => GeoCodeDto)
   geoCodeData: GeoCodeDto;
+
+  @IsBoolean() isPrivate: boolean = false;
+  @IsBoolean() isPublic: boolean = false;
 
   @IsString() createdBy: string;
 }

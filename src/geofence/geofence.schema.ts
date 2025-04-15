@@ -35,6 +35,8 @@ export class Geofence extends Document {
   @Prop({}) finalAddress: string;
   @Prop({ type: Object }) geoCodeData: GeoCode;
   @Prop({}) createdBy: string;
+  @Prop({ default: false }) isPrivate: boolean;
+  @Prop({ default: false }) isPublic: boolean;
 }
 
 export const GeofenceSchema = SchemaFactory.createForClass(Geofence);
